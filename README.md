@@ -1,8 +1,6 @@
 # Project-1
 
-# User Story: 
-
-# Brick Blocker Game
+# User Story: Brick Blocker Game
 
 If I were a user I would want to:
 
@@ -19,6 +17,8 @@ if won, have a screen effect that excites me?
 I would want some sort of reward while playing the game. 
 
 have bricks disapear as they are hit. 
+
+# Images 
 
 <br>
 <img src="images-for-readme/Images/Scenario.png">
