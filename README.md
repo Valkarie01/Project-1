@@ -21,14 +21,14 @@ I would want some sort of reward while playing the game.
 have bricks disapear as they are hit. 
 
 <br>
-<img src="Images/Scenario.png">
+<img src="images-for-readme/Images/Scenario.png">
 <br>
-<img src="Images/Story1.png">
+<img src="images-for-readme/Images/Story1.png">
 <br>
-<img src="Images/Story2.png">
+<img src="images-for-readme/Images/Story2.png">
 <br>
-<img src="Images/Story3.png">
+<img src="images-for-readme/Images/Story3.png">
 <br>
-<img src="Images/Story4.png">
+<img src="images-for-readme/Images/Story4.png">
 <br>
-<img src="Images/Story5.png">
+<img src="images-for-readme/Images/Story5.png">
