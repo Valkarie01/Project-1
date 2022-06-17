@@ -31,9 +31,9 @@ If possible add a difficulties
 
     adding some obstruction randomly throughout the game
 
-    like adding a bar that pops up randomly to have the player suffer a little in a harder difficluty
+    like adding a bar that pops up randomly to have the player <br> suffer a little in a harder difficluty
 
-    maybe have some bricks that instead of dying immediatly they take a few hits and change color when hit to show that it needs to be hit more.
+    maybe have some bricks that instead of dying immediatly they take <br> a few hits and change color when hit to show <br> that it needs to be hit more.
 
 
 
