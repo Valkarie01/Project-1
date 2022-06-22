@@ -12,3 +12,24 @@ body {
     display: block;
     margin: 0 auto;
 }
+
+.paddle {
+    border-radius: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    border-color: black;
+    font-size: 18px;
+    transition:  200ms transform;
+    font-weight: 600;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+}
