@@ -25,6 +25,12 @@ const bricks = []
 const rowCount = 5
 const columnCount = 22
 
+// score variables
+let score = 0 
+
+// end game 
+let gameOver = false
+
 function Brick(x, y, color) {
     this.x = x
     this.y = y 
@@ -38,7 +44,7 @@ for(let r = 0; r < rowCount; r++) {
 
     for(c = 0; c < columnCount; c++) {
         let startX = 50 + (c * 50)
-        let startY = 30 + (r * 20)
+        let startY = 50 + (r * 20)
         let red = Math.floor(Math.random() * 256)
         let green = Math.floor(Math.random() * 256)
         let blue = Math.floor(Math.random() * 256)
@@ -51,15 +57,30 @@ for(let r = 0; r < rowCount; r++) {
 function drawBricks() {
     for(let r = 0; r < rowCount; r++) {
         for(c = 0; c < columnCount; c++) {
-            ctx.beginPath()
-            ctx.rect(bricks[r][c].x, bricks[r][c].y, bricks[r][c].width, bricks[r][c].height)
-            ctx.fillStyle = bricks[r][c].color
-            ctx.fill()
-            ctx.stroke()
-            ctx.closePath()
+            if(!bricks[r][c].hasBeenHit) {
+                ctx.beginPath()
+                ctx.rect(bricks[r][c].x, bricks[r][c].y, bricks[r][c].width, bricks[r][c].height)
+                ctx.fillStyle = bricks[r][c].color
+                ctx.fill()
+                ctx.stroke()
+                ctx.closePath()
+            } 
+            if(!bricks[r][c].hasBeenHit) {
+                if (ballX + 10 > bricks[r][c].x && ballX - 10 < bricks[r][c].x + bricks[r][c].width && ballY + 10 > bricks[r][c].y && ballY - 10 < bricks[r][c].y + bricks[r][c].height) {
+                    bricks[r][c].hasBeenHit = true
+                    ballYChange *= -1
+                    score++ 
+                }
+            }
         }
     }
     
+}
+
+function drawScore() {
+    ctx.font = '35px Ariel'
+    ctx.fillStyle = 'blue'
+    ctx.fillText('Score ' + score , 1050, 30)
 }
 
 // calls the functions for the keys
@@ -93,42 +114,59 @@ function movement() {
 function drawPaddle() {
     ctx.fillStyle = "red"
     ctx.fillRect(paddleX, paddleY, paddleWidth, paddleHeight)
+    ctx.fillStyle = 'radius: 3px'
 }
 
 // Draws the ball on the screen
 function drawBall() {
-    ctx.strokeStyle = 'black'
+    ctx.strokeStyle = '#d13d79'
     ctx.beginPath()
     ctx.arc(ballX, ballY, radius, 0, 2 * Math.PI)
-    ctx.fillStyle = "black"
+    ctx.fillStyle = "#d13d79"
     ctx.fill()
     ctx.stroke()
 }
 
 
 // When ball collides with something it will change direction
+
 function collison() {
     if(ballX + radius > 1200 || ballX - radius < 0) {
         ballXChange *= -1 
     }
+
     if(ballY + radius > 600 || ballY - radius < 0) {
         ballYChange *= -1 
+        if(ballY + radius > 600) {
+            gameOver = true
+        }
     }
+
+
     if(ballX > paddleX && ballX < paddleX + paddleWidth && ballY + radius > paddleY) {
         ballYChange *= -1
     }
 }
 
+
 // Makes game run
 function gameLoop() {
     ctx.clearRect(0, 0, 1200, 600)
-    drawPaddle()
-    drawBall()
-    collison()
-    movement()
-    drawBricks()
-    ballX = ballX + ballXChange
-    ballY = ballY + ballYChange
+        if(!gameOver) {
+            drawBall()
+            collison()
+            drawPaddle()
+            movement()
+            drawBricks()
+            drawScore()
+            ballX = ballX + ballXChange
+            ballY = ballY + ballYChange
+        } else {
+            ctx.font = '100px Ariel'
+            ctx.fillStyle = 'purple'
+            ctx.fillText('Game is over ', 350, 300)
+            ctx.fillText('The Score was ' + score , 350, 420)
+        }
 }
 
 setInterval(gameLoop, 10)
