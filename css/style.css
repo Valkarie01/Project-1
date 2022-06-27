@@ -17,7 +17,7 @@ body {
     border-radius: 20px;
 }
 
-button {
+/* button {
     padding: 10px 20px;
     margin-top: 10px;
     border-radius: 10px;
@@ -32,4 +32,4 @@ button {
 button:hover {
     cursor: pointer;
     transform: translateY(-2px);
-}
+} */

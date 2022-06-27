@@ -1,20 +1,18 @@
 const canvas =  document.querySelector('#myCanvas')
 const ctx = canvas.getContext('2d')
-let reset = document.querySelector('#reset')
-reset.addEventListener('click', redraw)
 document.addEventListener('keydown', keyDownHandler)
 document.addEventListener('keyup', keyUpHandler)
 
 // variables for ball
 let ballX = canvas.width / 2
-let ballY = canvas.height / 2
-let ballXChange = -3.5
-let ballYChange = -4
+let ballY = canvas.height - 30
+let ballXChange = Math.floor(Math.random() + -2.5 )
+let ballYChange = Math.floor(Math.random() + -3 )
 let radius = 10
 
 // variables for paddle
-let paddleX = 600
-let paddleY = 580
+let paddleX = 530
+let paddleY = 630
 const paddleWidth = 150
 const paddleHeight = 15
 let leftPressed = false
@@ -23,11 +21,14 @@ let paddleSpeed = 6
 
 // variables for bricks
 const bricks = []
-const rowCount = 5
+const rowCount = 3
 const columnCount = 22
 
 // score variables
 let score = 0 
+
+// lives variable.
+let lives = 3
 
 // end game 
 let gameOver = false
@@ -79,8 +80,8 @@ function drawBricks() {
 }
 
 function drawScore() {
-    ctx.font = '35px Ariel'
-    ctx.fillStyle = 'blue'
+    ctx.font = '35px  sans-serif'
+    ctx.fillStyle = '#94AFF8'
     ctx.fillText('Score ' + score , 1050, 30)
 }
 
@@ -135,9 +136,9 @@ function collison() {
         ballXChange *= -1
     }
 
-    if(ballY + radius > 600 || ballY - radius < 0) {
+    if(ballY + radius > 700 || ballY - radius < 0) {
         ballYChange *= -1
-        if(ballY + radius > 600) {
+        if(ballY + radius > 700) {
             gameOver = true
         }
     }
@@ -148,10 +149,11 @@ function collison() {
 }
 
 
+
 // Makes game run
 function gameLoop() {
-    ctx.clearRect(0, 0, 1200, 600)
-    if(!gameOver) {
+    ctx.clearRect(0, 0, 1200, 700)
+    if(!gameOver){
         drawBall()
         collison()
         drawPaddle()
@@ -160,28 +162,13 @@ function gameLoop() {
         drawScore()
         ballX += ballXChange
         ballY += ballYChange
-    } else {
-            ctx.font = '100px Ariel'
-            ctx.fillStyle = 'purple'
-            ctx.fillText('Game is over ', 350, 300)
-            ctx.fillText('The Score was ' + score , 350, 420)
-        }
+    } else if(gameOver) {
+            ctx.font = '100px sans-serif'
+            ctx.fillStyle = '#94AFF8'
+            ctx.fillText('Game over ', 350, 300)
+            ctx.fillText('The Score: ' + score , 320, 420)
     }
-    function redraw() {
-        score = 0
-        ballX = canvas.width / 2
-        ballY = canvas.height / 2 
-        paddleX = 600
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        drawBall();
-        collison()
-        drawPaddle();
-        movement()
-        drawBricks();
-        drawScore();
-        ctx.closePath
-      }
+} 
     
     setInterval(gameLoop, 10)
-    redraw(reset)
     
